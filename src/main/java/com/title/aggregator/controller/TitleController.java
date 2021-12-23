@@ -1,0 +1,31 @@
+package com.title.aggregator.controller;
+
+import com.title.aggregator.api.TitleResponse;
+import com.title.aggregator.domain.model.Titles;
+import com.title.aggregator.domain.service.TitlesService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.core.convert.ConversionService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
+@RestController
+@RequestMapping(value = "/titles", produces = APPLICATION_JSON_VALUE)
+@RequiredArgsConstructor
+public class TitleController {
+
+    private final ConversionService conversionService;
+    private final TitlesService titlesService;
+
+    @GetMapping
+    public TitleResponse getTitles() {
+        List<Titles> titles = titlesService.findTitles();
+        TitleResponse titleResponse = new TitleResponse();
+        titles.forEach(modelTitles -> titleResponse.addTitles(conversionService.convert(modelTitles, com.title.aggregator.api.Titles.class)));
+        return titleResponse;
+    }
+}
