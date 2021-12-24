@@ -3,6 +3,7 @@ package com.title.aggregator.bot;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.title.aggregator.bot.states.State;
+import com.title.aggregator.beans.TelegramBotProperties;
 import com.title.aggregator.bot.states.StateHelper;
 import com.title.aggregator.domain.model.Title;
 import com.title.aggregator.domain.service.SubscriptionService;
@@ -42,10 +43,11 @@ public class TitleBot extends TelegramWebhookBot {
     private final List<State> states;
     private final StateHelper stateHelper;
     private final ObjectMapper objectMapper;
+    private final TelegramBotProperties properties;
 
     @Override
     public String getBotToken() {
-        return "1043763747:AAF6Kfcf0CB_lmUleMvGvPs8ZF9K1d2IW6k";
+        return properties.getToken();
     }
 
     @Override
@@ -69,7 +71,7 @@ public class TitleBot extends TelegramWebhookBot {
 
     @Override
     public String getBotUsername() {
-        return "ZaharTouristBot";
+        return properties.getName();
     }
 
     @SneakyThrows
