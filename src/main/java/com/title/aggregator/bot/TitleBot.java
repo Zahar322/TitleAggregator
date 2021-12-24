@@ -3,6 +3,7 @@ package com.title.aggregator.bot;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.title.aggregator.bot.states.State;
+import com.title.aggregator.beans.TelegramBotProperties;
 import com.title.aggregator.bot.states.StateHelper;
 import com.title.aggregator.domain.model.Title;
 import com.title.aggregator.domain.service.SubscriptionService;
