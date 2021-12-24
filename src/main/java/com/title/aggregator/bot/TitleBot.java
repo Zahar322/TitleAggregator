@@ -42,10 +42,11 @@ public class TitleBot extends TelegramWebhookBot {
     private final List<State> states;
     private final StateHelper stateHelper;
     private final ObjectMapper objectMapper;
+    private final TelegramBotProperties properties;
 
     @Override
     public String getBotToken() {
-        return "1043763747:AAF6Kfcf0CB_lmUleMvGvPs8ZF9K1d2IW6k";
+        return properties.getToken();
     }
 
     @Override
@@ -69,7 +70,7 @@ public class TitleBot extends TelegramWebhookBot {
 
     @Override
     public String getBotUsername() {
-        return "ZaharTouristBot";
+        return properties.getName();
     }
 
     @SneakyThrows
