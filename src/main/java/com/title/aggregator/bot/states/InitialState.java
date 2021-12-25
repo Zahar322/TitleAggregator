@@ -26,7 +26,7 @@ public class InitialState extends State {
     @Override
     public List<BotApiMethod> process(Update update, TelegramUser user) {
         Long chatId = update.getMessage().getChatId();
-        TelegramUser telegramUser = new TelegramUser(chatId, SELECT_VOICE_ACTING);
+        TelegramUser telegramUser = new TelegramUser(chatId, SELECT_VOICE_ACTING, update.getMessage().getFrom());
         userRepository.save(new User(telegramUser));
         return Arrays.asList(createInitMessage(chatId), selectState.createMessage(chatId));
     }
