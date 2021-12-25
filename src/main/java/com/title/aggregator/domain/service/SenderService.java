@@ -25,7 +25,7 @@ public class SenderService {
     private final TitlesService titlesService;
     private final SubscriptionService subscriptionService;
 
-    @Scheduled(fixedDelay = 40000)
+    @Scheduled(fixedDelay = 600000)
     public void updateTitles() {
         MDC.put(CHAT_ID, UPDATE_TITLES);
         List<Titles> titles = titlesService.getTitles();
