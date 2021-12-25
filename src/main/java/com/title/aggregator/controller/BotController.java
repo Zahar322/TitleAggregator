@@ -33,7 +33,7 @@ public class BotController {
     public BotApiMethod receiveUpdate(@RequestBody Update update) {
         MDC.put(CHAT_ID, getChatId(update).toString());
         log.info(mapper.writeValueAsString(update));
-        Charset.defaultCharset();
+        log.info(String.valueOf(Charset.defaultCharset()));
         return botService.updateReceived(update);
     }
 }
