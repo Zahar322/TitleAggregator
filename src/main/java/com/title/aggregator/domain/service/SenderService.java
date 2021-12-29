@@ -7,13 +7,9 @@ import com.title.aggregator.domain.model.Title;
 import com.title.aggregator.domain.model.Titles;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.MDC;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-import static com.title.aggregator.utils.Constants.MDCKeys.CHAT_ID;
-import static com.title.aggregator.utils.Constants.MDCKeys.UPDATE_TITLES;
 
 @Slf4j
 @Service
@@ -31,8 +27,6 @@ public class SenderService {
     }
 
     public void updateTitles(List<Titles> titles) {
-        MDC.put(CHAT_ID, UPDATE_TITLES);
-        log.info("request received");
         com.title.aggregator.jpa.models.Titles jpaTitles = titlesService.findFirstTitles();
         jpaTitles.getTitles().forEach(fromJpaTitles -> sendNotification(titles, fromJpaTitles));
         titlesService.save(titles);
