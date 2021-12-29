@@ -1,13 +1,12 @@
 package com.title.aggregator.domain.service;
 
 import com.title.aggregator.bot.TitleBot;
+import com.title.aggregator.clients.TitleClient;
 import com.title.aggregator.domain.model.Title;
 import com.title.aggregator.domain.model.Titles;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,17 +17,20 @@ import static com.title.aggregator.utils.Constants.MDCKeys.UPDATE_TITLES;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-@ConditionalOnProperty(name = "scheduler.enabled", havingValue = "true")
 public class SenderService {
 
     private final TitleBot titleBot;
     private final TitlesService titlesService;
     private final SubscriptionService subscriptionService;
+    private final TitleClient titleClient;
 
-    @Scheduled(fixedDelay = 600000)
-    public void updateTitles() {
-        MDC.put(CHAT_ID, UPDATE_TITLES);
+    public void sendNotification() {
         List<Titles> titles = titlesService.getTitles();
+        titleClient.sendTitles(titles);
+    }
+
+    public void updateTitles(List<Titles> titles) {
+        MDC.put(CHAT_ID, UPDATE_TITLES);
         com.title.aggregator.jpa.models.Titles jpaTitles = titlesService.findFirstTitles();
         jpaTitles.getTitles().forEach(fromJpaTitles -> sendNotification(titles, fromJpaTitles));
         titlesService.save(titles);

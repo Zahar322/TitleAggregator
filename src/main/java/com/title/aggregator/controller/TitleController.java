@@ -2,10 +2,12 @@ package com.title.aggregator.controller;
 
 import com.title.aggregator.api.TitleResponse;
 import com.title.aggregator.domain.model.Titles;
+import com.title.aggregator.domain.service.SenderService;
 import com.title.aggregator.domain.service.TitlesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +22,7 @@ public class TitleController {
 
     private final ConversionService conversionService;
     private final TitlesService titlesService;
+    private final SenderService senderService;
 
     @GetMapping
     public TitleResponse getTitles() {
@@ -27,5 +30,10 @@ public class TitleController {
         TitleResponse titleResponse = new TitleResponse();
         titles.forEach(modelTitles -> titleResponse.addTitles(conversionService.convert(modelTitles, com.title.aggregator.api.Titles.class)));
         return titleResponse;
+    }
+
+    @PostMapping
+    public void sendTitles(List<Titles> titles) {
+        senderService.updateTitles(titles);
     }
 }

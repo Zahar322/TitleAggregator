@@ -17,3 +17,20 @@ telegram:
 
 server:
   port: 8080
+
+
+
+feign:
+  client:
+    config:
+      titles:
+        url: https://ani-title.site/
+        connectTimeout: 5000
+        readTimeout: 15000
+        loggerLevel: FULL
+  httpclient:
+    enabled: true
+    max-connections: 50
+    max-connections-per-route: 50
+    time-to-live: 900
+    time-to-live-unit: SECONDS
