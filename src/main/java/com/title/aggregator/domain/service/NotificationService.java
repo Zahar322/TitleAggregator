@@ -1,5 +1,6 @@
 package com.title.aggregator.domain.service;
 
+import com.title.aggregator.api.TitlesRequest;
 import com.title.aggregator.clients.TitleClient;
 import com.title.aggregator.domain.model.Titles;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class NotificationService {
     @Scheduled(fixedDelay = 600000)
     public void sendNotification() {
         List<Titles> titles = titlesService.getTitles();
-        titleClient.sendTitles(titles);
+        titleClient.sendTitles(new TitlesRequest(titles));
     }
 
 }
