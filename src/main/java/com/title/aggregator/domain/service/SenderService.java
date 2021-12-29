@@ -1,5 +1,6 @@
 package com.title.aggregator.domain.service;
 
+import com.title.aggregator.api.TitlesRequest;
 import com.title.aggregator.bot.TitleBot;
 import com.title.aggregator.clients.TitleClient;
 import com.title.aggregator.domain.model.Title;
@@ -26,11 +27,12 @@ public class SenderService {
 
     public void sendNotification() {
         List<Titles> titles = titlesService.getTitles();
-        titleClient.sendTitles(titles);
+        titleClient.sendTitles(new TitlesRequest(titles));
     }
 
     public void updateTitles(List<Titles> titles) {
         MDC.put(CHAT_ID, UPDATE_TITLES);
+        log.info("request received");
         com.title.aggregator.jpa.models.Titles jpaTitles = titlesService.findFirstTitles();
         jpaTitles.getTitles().forEach(fromJpaTitles -> sendNotification(titles, fromJpaTitles));
         titlesService.save(titles);

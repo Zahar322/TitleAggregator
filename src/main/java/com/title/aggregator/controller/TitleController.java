@@ -1,6 +1,7 @@
 package com.title.aggregator.controller;
 
 import com.title.aggregator.api.TitleResponse;
+import com.title.aggregator.api.TitlesRequest;
 import com.title.aggregator.domain.model.Titles;
 import com.title.aggregator.domain.service.SenderService;
 import com.title.aggregator.domain.service.TitlesService;
@@ -33,7 +34,7 @@ public class TitleController {
     }
 
     @PostMapping
-    public void sendTitles(List<Titles> titles) {
-        senderService.updateTitles(titles);
+    public void sendTitles(TitlesRequest request) {
+        senderService.updateTitles(request.getTitles());
     }
 }
