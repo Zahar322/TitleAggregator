@@ -1,5 +1,6 @@
 package com.title.aggregator.clients;
 
+import com.title.aggregator.api.TitlesRequest;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,5 +12,5 @@ public interface TitleClient {
     String getTitles();
 
     @PostMapping("titles")
-    void sendTitles(Object object);
+    void sendTitles(TitlesRequest request);
 }
