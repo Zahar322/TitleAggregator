@@ -8,7 +8,7 @@
 #    password: root
 
 scheduler:
-  enabled : ${scheduler_enabled:false}
+  enabled : ${scheduler_enabled:true}
 
 telegram:
   bot:
