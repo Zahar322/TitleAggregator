@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
+import static com.title.aggregator.utils.Constants.Animaunt.ANIMAUNT;
 import static java.util.stream.Collectors.toList;
 
 @Service
@@ -39,6 +40,21 @@ public class TitlesService {
         return actings.stream()
                       .map(VoiceActing::getTitles)
                       .collect(toList());
+    }
+
+    public List<Titles> getTitlesWithoutAnimaunt() {
+        return actings.stream()
+                      .filter(acting -> !acting.getVoiceActing().equals(ANIMAUNT))
+                      .map(VoiceActing::getTitles)
+                      .collect(toList());
+    }
+
+    public Titles getAnimauntTitles() {
+        return actings.stream()
+                      .filter(acting -> !acting.getVoiceActing().equals(ANIMAUNT))
+                      .findFirst()
+                      .map(VoiceActing::getTitles)
+                      .orElse(null);
     }
 
     public void save(List<Titles> titles) {

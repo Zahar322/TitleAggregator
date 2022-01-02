@@ -41,6 +41,7 @@ public class TitleController {
     @PostMapping
     public void sendTitles(@RequestBody TitlesRequest request) {
         MDC.put(CHAT_ID, UPDATE_TITLES);
+        request.getTitles().add(titlesService.getAnimauntTitles());
         try {
             log.info(mapper.writeValueAsString(request));
         } catch (JsonProcessingException e) {
