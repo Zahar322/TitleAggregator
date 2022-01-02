@@ -51,7 +51,7 @@ public class TitlesService {
 
     public Titles getAnimauntTitles() {
         return actings.stream()
-                      .filter(acting -> !acting.getVoiceActing().equals(ANIMAUNT))
+                      .filter(acting -> acting.getVoiceActing().equals(ANIMAUNT))
                       .findFirst()
                       .map(VoiceActing::getTitles)
                       .orElse(null);
