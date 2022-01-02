@@ -12,8 +12,8 @@ scheduler:
 
 telegram:
   bot:
-    token: 1043763747:AAF6Kfcf0CB_lmUleMvGvPs8ZF9K1d2IW6k
-    name: ZaharTouristBot
+    token: 5099600183:AAFf5q-NlIclg8CyyFCKneAeOWiUiD88wPA
+    name: ani_title_bot
 
 server:
   port: 8080
