@@ -20,7 +20,7 @@ public class NotificationService {
 
     @Scheduled(fixedDelay = 600000)
     public void sendNotification() {
-        List<Titles> titles = titlesService.getTitles();
+        List<Titles> titles = titlesService.getTitlesWithoutAnimaunt();
         titleClient.sendTitles(new TitlesRequest(titles));
     }
 

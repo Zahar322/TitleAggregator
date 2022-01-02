@@ -22,7 +22,7 @@ public class SenderService {
     private final TitleClient titleClient;
 
     public void sendNotification() {
-        List<Titles> titles = titlesService.getTitles();
+        List<Titles> titles = titlesService.getTitlesWithoutAnimaunt();
         titleClient.sendTitles(new TitlesRequest(titles));
     }
 
