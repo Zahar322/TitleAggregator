@@ -96,7 +96,7 @@ public class TitlesService {
 
     public Titles findTitlesFromSubscriptions(List<Subscription> subscriptions, com.title.aggregator.jpa.models.Titles titles) {
         Titles domainTitles = new Titles();
-        List<Title> title = subscriptions.stream().map(subscription -> findTitleFromSubscription(subscription, titles)).collect(toList());
+        List<Title> title = subscriptions.stream().map(subscription -> findTitleFromSubscription(subscription, titles)).filter(Objects::nonNull).collect(toList());
         domainTitles.setTitles(title);
         return domainTitles;
     }
