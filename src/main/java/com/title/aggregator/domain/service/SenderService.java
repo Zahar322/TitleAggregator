@@ -29,7 +29,7 @@ public class SenderService {
     public void updateTitles(List<Titles> titles) {
         com.title.aggregator.jpa.models.Titles jpaTitles = titlesService.findFirstTitles();
         jpaTitles.getTitles().forEach(fromJpaTitles -> sendNotification(titles, fromJpaTitles));
-        titlesService.save(titles);
+        titlesService.save(titles, jpaTitles.getId());
     }
 
     private void sendNotification(List<Titles> titles, Titles fromJpaTitles) {

@@ -32,7 +32,7 @@ public class TitlesService {
 
     public List<Titles> initTitles() {
         List<Titles> titles = getTitles();
-        save(titles);
+        save(titles, null);
         return titles;
     }
 
@@ -57,8 +57,9 @@ public class TitlesService {
                       .orElse(null);
     }
 
-    public void save(List<Titles> titles) {
+    public void save(List<Titles> titles, Long id) {
         com.title.aggregator.jpa.models.Titles jpaTitles = new com.title.aggregator.jpa.models.Titles();
+        jpaTitles.setId(id);
         jpaTitles.setTitles(titles);
         repository.save(jpaTitles);
     }
